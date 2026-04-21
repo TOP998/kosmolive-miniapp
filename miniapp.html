@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>🤖 Kosmolive | Заявка</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0f172a;--text:#fff;--muted:rgba(255,255,255,0.6);--sec:rgba(255,255,255,0.85);--cyan:#06b6d4;--cyan-light:#67e8f9;--border:rgba(103,232,249,0.3);--glass:rgba(255,255,255,0.02)}
+*{margin:0;padding:0;box-sizing:border-box;user-select:none}
+body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:20px}
+.stars{position:fixed;inset:0;pointer-events:none;background-image:radial-gradient(2px 2px at 20px 30px,rgba(255,255,255,0.3),transparent),radial-gradient(2px 2px at 40px 70px,rgba(103,232,249,0.4),transparent);background-size:200px 200px;animation:t 8s infinite}@keyframes t{0%,100%{opacity:.8}50%{opacity:1}}
+.container{max-width:100%;margin:0 auto;padding:0 18px;position:relative;z-index:1}
+header{background:rgba(15,23,42,0.95);backdrop-filter:blur(15px);border-bottom:1px solid var(--border);padding:14px 0;position:sticky;top:0;z-index:100}
+.h-inner{display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:18px;font-weight:900;background:linear-gradient(135deg,#67e8f9,#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.step-ind{font-size:11px;color:var(--muted);background:rgba(103,232,249,0.08);padding:5px 10px;border-radius:16px;border:1px solid rgba(103,232,249,0.2)}
+.step{display:none;padding:20px 0 30px;animation:fade .3s ease}.step.active{display:block}@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+h2{font-size:20px;font-weight:900;line-height:1.2;margin-bottom:10px;text-align:center}
+.sub{font-size:13px;color:var(--sec);text-align:center;margin-bottom:18px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:16px}
+.card{background:var(--glass);border:1.5px solid var(--border);border-radius:12px;padding:12px 10px;text-align:center;cursor:pointer;transition:.2s;backdrop-filter:blur(8px)}
+.card:active,.card.sel{border-color:var(--cyan-light);background:rgba(103,232,249,0.08)}
+.ic{font-size:20px;display:block;margin-bottom:4px}.lb{font-size:11px;font-weight:700;color:#fff}.ds{font-size:9px;color:var(--muted)}
+.inp{width:100%;background:var(--glass);border:1.5px solid var(--border);border-radius:12px;padding:12px;font-size:13px;color:#fff;margin-bottom:12px}
+.inp:focus{outline:none;border-color:var(--cyan-light)}
+.inp.err{border-color:#f87171}.hint{font-size:10px;color:var(--muted);margin-top:-8px;margin-bottom:12px}.err-msg{color:#f87171;font-size:10px;display:none;margin-top:-10px;margin-bottom:12px}
+.btn{width:100%;padding:14px;border-radius:50px;font-weight:700;font-size:14px;cursor:pointer;border:none;transition:.2s;margin-bottom:8px}
+.pri{background:rgba(103,232,249,0.15);color:#fff;border:1.5px solid rgba(103,232,249,0.5)}.pri:active{transform:translateY(-1px)}
+.sec{background:rgba(255,255,255,0.04);color:#fff;border:1.5px solid rgba(255,255,255,0.3)}.sec:active{background:rgba(255,255,255,0.08)}
+.prew{background:var(--glass);border:1.5px solid var(--border);border-radius:14px;padding:14px;margin-bottom:16px}
+.row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06)}.row:last-child{border:none}
+.lbl{font-size:11px;color:var(--muted)}.val{font-size:13px;color:#fff;text-align:right;max-width:60%;word-break:break-word}
+.load{display:none;text-align:center;padding:30px}.load.active{display:block}.spin{width:36px;height:36px;border:3px solid rgba(103,232,249,0.2);border-top-color:var(--cyan-light);border-radius:50%;margin:0 auto 12px;animation:sp 1s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
+.ok{text-align:center}.ok-ic{font-size:48px;margin-bottom:12px}.ok-t{font-size:18px;font-weight:900;margin-bottom:8px}.ok-d{font-size:13px;color:var(--sec);margin-bottom:18px}
+footer{text-align:center;padding:16px;color:var(--muted);font-size:11px;border-top:1px solid rgba(255,255,255,0.08);background:rgba(0,0,0,0.2)}
+@media(min-width:420px){.grid{grid-template-columns:repeat(3,1fr)}.container{padding:0 22px}}
+.card,.prew{box-shadow:0 0 30px rgba(103,232,249,0.2),inset 0 0 15px rgba(103,232,249,0.03) !important}
+</style>
+</head>
+<body>
+<div class="stars"></div>
+<header><div class="container h-inner"><div class="logo">🤖 Kosmolive</div><div class="step-ind" id="ind">Загрузка...</div></div></header>
+
+<main class="container">
+  <section class="step active" id="s1"><h2>Выберите сферу ✨</h2><p class="sub">Это поможет предложить оптимальное решение</p>
+    <div class="grid">
+      <div class="card" data-v="eshop"><span class="ic">🛒</span><span class="lb">Интернет-магазин</span><span class="ds">Каталог, заказы</span></div>
+      <div class="card" data-v="services"><span class="ic">🧰</span><span class="lb">Услуги/Мастера</span><span class="ds">Запись, заявки</span></div>
+      <div class="card" data-v="build"><span class="ic">🏢</span><span class="lb">Строительство</span><span class="ds">Портфолио, расчёт</span></div>
+      <div class="card" data-v="social"><span class="ic">📲</span><span class="lb">Продажи в соцсетях</span><span class="ds">IG, TikTok, TG</span></div>
+      <div class="card" data-v="auto"><span class="ic">🎛</span><span class="lb">Автоматизация</span><span class="ds">Рутина, ответы</span></div>
+      <div class="card" data-v="other"><span class="ic">✍️</span><span class="lb">Другое</span><span class="ds">Ваша задача</span></div>
+      <div class="card" data-v="assistant"><span class="ic">🤖</span><span class="lb">Личный ассистент</span><span class="ds">Помощник</span></div>
+      <div class="card" data-v="support"><span class="ic">🛠</span><span class="lb">Сопровождение</span><span class="ds">Поддержка</span></div>
+    </div>
+    <button class="btn pri" id="n1" disabled>Далее →</button>
+    <button class="btn sec" onclick="supp()">💬 Поддержка</button>
+  </section>
+
+  <section class="step" id="s2"><h2>Опишите задачу 📋</h2><p class="sub">Чем подробнее — тем точнее оценка</p>
+    <textarea class="inp" id="desc" rows="4" placeholder="Бот должен принимать заказы, показывать свободное время..."></textarea>
+    <div class="hint">💡 Укажите функционал, примеры, требования</div>
+    <div class="err-msg" id="dErr">Минимум 20 символов</div>
+    <button class="btn sec" onclick="go(1)">← Назад</button>
+    <button class="btn pri" onclick="valDesc()">Далее →</button>
+  </section>
+
+  <section class="step" id="s3"><h2>Хостинг и поддержка? 🛠</h2><p class="sub">Мы возьмём техническую часть на себя</p>
+    <div class="grid" style="grid-template-columns:1fr 1fr">
+      <div class="card sel" data-v="yes" onclick="selH(this)"><span class="ic">✅</span><span class="lb">С сопровождением</span></div>
+      <div class="card" data-v="no" onclick="selH(this)"><span class="ic">❌</span><span class="lb">Только бот</span></div>
+    </div>
+    <div class="prew"><div class="row"><span class="lbl">💰 Ориентир</span><span class="val" id="prc">от 15 000 ₽</span></div><div class="row"><span class="lbl">⏱ Сроки</span><span class="val">3–5 дней</span></div></div>
+    <button class="btn sec" onclick="go(2)">← Назад</button>
+    <button class="btn pri" onclick="go(4)">Далее →</button>
+  </section>
+
+  <section class="step" id="s4"><h2>Контакт для связи 📞</h2><p class="sub">Телефон или @username — ответим за 24ч</p>
+    <input class="inp" id="cont" placeholder="+71234567890 или @username">
+    <div class="hint">🔐 Данные не передаются третьим лицам</div>
+    <div class="err-msg" id="cErr">Введите телефон (+7...) или username (@...)</div>
+    <button class="btn sec" onclick="go(3)">← Назад</button>
+    <button class="btn pri" onclick="valCont()">Показать заявку →</button>
+  </section>
+
+  <section class="step" id="s5"><h2>Проверьте заявку 🔍</h2><p class="sub">После отправки можно будет внести 1 правку</p>
+    <div class="prew">
+      <div class="row"><span class="lbl">🎯 Сфера</span><span class="val" id="pS"></span></div>
+      <div class="row"><span class="lbl">📋 Задача</span><span class="val" id="pD"></span></div>
+      <div class="row"><span class="lbl">🛠 Сопровождение</span><span class="val" id="pH"></span></div>
+      <div class="row"><span class="lbl">📞 Контакт</span><span class="val" id="pC"></span></div>
+    </div>
+    <button class="btn sec" onclick="go(4)">← Изменить</button>
+    <button class="btn pri" onclick="sub()">🚀 Отправить заявку</button>
+  </section>
+
+  <div class="load" id="load"><div class="spin"></div><div class="hint">Отправляем...</div></div>
+
+  <section class="step" id="ok"><div class="ok"><div class="ok-ic">✨</div><div class="ok-t">Заявка отправлена! 🎉</div><div class="ok-d">Мы свяжемся в течение 24 часов.<br>Если нужно — нажмите «Поправить».</div>
+    <button class="btn pri" onclick="supp()">💬 Поддержка</button>
+    <button class="btn sec" id="corrBtn" onclick="corr()">✏️ Поправить заявку</button>
+    <button class="btn sec" onclick="reset()">🔄 Начать заново</button>
+  </div></section>
+
+  <section class="step" id="wait"><div class="ok"><div class="ok-ic">⏳</div><div class="ok-t">Заявка уже отправлена</div><div class="ok-d">Вы уже отправляли заявку. Мы её получили.<br>Если нужно внести изменение — нажмите «Поправить заявку».</div>
+    <button class="btn sec" onclick="corr()">✏️ Поправить заявку</button>
+    <button class="btn sec" onclick="supp()">💬 Связаться с поддержкой</button>
+    <button class="btn sec" onclick="reset()">🔄 Начать заново</button>
+  </div></section>
+
+  <section class="step" id="done"><div class="ok"><div class="ok-ic">✅</div><div class="ok-t">Готово</div><div class="ok-d">Вы уже отправили заявку и исправление. Спасибо!<br>Менеджер свяжется с вами.</div>
+    <button class="btn sec" onclick="reset()">🔄 Начать заново</button>
+  </div></section>
+</main>
+
+<footer>© 2026 Kosmolive • AI-автоматизация 🔗</footer>
+
+<script>
+const tg=window.Telegram?.WebApp; if(tg){tg.ready();tg.expand()}
+const API=location.origin; // API на том же домене, что и бот
+const uid=tg?.initDataUnsafe?.user?.id;
+const uname=tg?.initDataUnsafe?.user?.username||String(uid);
+const fm={s:null,d:'',h:'yes',c:''};
+
+// Загрузка состояния при старте (копия cmd_start)
+async function loadState(){
+  document.getElementById('ind').textContent='Проверка...';
+  try{
+    const r=await fetch(`${API}/api/state`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid})});
+    const d=await r.json();
+    if(d.error) throw new Error(d.error);
+    
+    document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
+    if(d.state==='submitted'){
+      document.getElementById('wait').classList.add('active');
+      if(!d.can_correct) document.getElementById('corrBtn').style.display='none';
+      document.getElementById('ind').textContent='Заявка отправлена';
+    } else if(d.state==='corrected'){
+      document.getElementById('done').classList.add('active');
+      document.getElementById('ind').textContent='Готово';
+    } else {
+      document.getElementById('s1').classList.add('active');
+      document.getElementById('ind').textContent='Шаг 1 из 5';
+    }
+  }catch(e){
+    console.error(e);
+    document.getElementById('ind').textContent='Начало';
+    document.getElementById('s1').classList.add('active');
+  }
+}
+loadState();
+
+document.querySelectorAll('.grid .card[data-v]').forEach(c=>{
+  c.onclick=()=>{
+    if(c.closest('#s3')){selH(c);return}
+    document.querySelectorAll('#s1 .card').forEach(b=>b.classList.remove('sel'));
+    c.classList.add('sel'); fm.s=c.dataset.v;
+    document.getElementById('n1').disabled=false;
+  }
+});
+document.getElementById('n1').onclick=()=>go(2);
+function go(n){
+  document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
+  document.getElementById(`s${n}`).classList.add('active');
+  document.getElementById('ind').textContent=`Шаг ${n} из 5`;
+  if(n===4) fillPrev();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function selH(el){
+  document.querySelectorAll('#s3 .card').forEach(b=>b.classList.remove('sel'));
+  el.classList.add('sel'); fm.h=el.dataset.v;
+  document.getElementById('prc').textContent=fm.h==='yes'?'от 15 000 ₽':'от 10 000 ₽';
+}
+function valDesc(){
+  const d=document.getElementById('desc').value.trim();
+  if(d.length<20){document.getElementById('desc').classList.add('err');document.getElementById('dErr').style.display='block';return}
+  document.getElementById('desc').classList.remove('err');document.getElementById('dErr').style.display='none';
+  fm.d=d; go(3);
+}
+function valCont(){
+  let c=document.getElementById('cont').value.trim().replace(/\s/g,'');
+  const p=/^\+?\d{10,15}$/.test(c.replace(/[^\d+]/g,''));
+  const u=/^@[\w\d_]{4,32}$/.test(c);
+  let valid=c;
+  if(!p&&!u){
+    if(/^[\w\d_]{4,32}$/.test(c)) valid='@'+c;
+    if(!/^@[\w\d_]{4,32}$/.test(valid)){document.getElementById('cont').classList.add('err');document.getElementById('cErr').style.display='block';return}
+  } else { valid = c; }
+  // Нормализация телефона как в боте
+  if(!valid.startsWith('@')){
+    valid=valid.replace(/[^\d+]/g,'');
+    if(valid.startsWith('8')&&valid.length===11) valid='+7'+valid.slice(1);
+    else if(valid.startsWith('9')&&valid.length===10) valid='+7'+valid;
+  }
+  document.getElementById('cont').classList.remove('err');document.getElementById('cErr').style.display='none';
+  fm.c=valid; go(4);
+}
+function fillPrev(){
+  const n={eshop:'🛒 Магазин',services:'🧰 Услуги',build:'🏢 Строительство',social:'📲 Соцсети',auto:'🎛 Автоматизация',other:'✍️ Другое',assistant:'🤖 Ассистент',support:'🛠 Сопровождение'};
+  document.getElementById('pS').textContent=n[fm.s]||fm.s;
+  document.getElementById('pD').textContent=fm.d.length>60?fm.d.slice(0,60)+'...':fm.d;
+  document.getElementById('pH').textContent=fm.h==='yes'?'✅ Да':'❌ Нет';
+  document.getElementById('pC').textContent=fm.c;
+}
+async function sub(){
+  document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
+  document.getElementById('load').classList.add('active');
+  try{
+    const r=await fetch(`${API}/api/submit`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid,username:uname,...fm})});
+    const d=await r.json();
+    if(d.error){alert('⚠️ '+d.message);go(4);return}
+    document.getElementById('load').classList.remove('active');
+    document.getElementById('ok').classList.add('active');
+    document.getElementById('ind').textContent='Готово ✨';
+  }catch(e){alert('Ошибка сети');go(4)}
+}
+async function corr(){
+  const txt=prompt("Напишите, что нужно исправить:");
+  if(!txt||txt.length<5) return;
+  document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
+  document.getElementById('load').classList.add('active');
+  try{
+    const r=await fetch(`${API}/api/correct`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({user_id:uid,username:uname,correction:txt})});
+    const d=await r.json();
+    document.getElementById('load').classList.remove('active');
+    if(d.error){alert('⚠️ '+d.message);loadState();return}
+    document.getElementById('done').classList.add('active');
+    document.getElementById('ind').textContent='Правка отправлена';
+  }catch(e){alert('Ошибка');loadState()}
+}
+function reset(){
+  location.reload();
+}
+function supp(){
+  if(tg) tg.openTelegramLink('https://t.me/Kosmolive');
+  else window.open('https://t.me/Kosmolive','_blank');
+}
+if(tg?.BackButton){
+  tg.BackButton.onClick(()=>{
+    const act=document.querySelector('.step.active');
+    if(act?.id==='ok'||act?.id==='wait') reset();
+    else if(act?.id!=='s1'){
+      const n=parseInt(act.id.replace('s',''));
+      if(n>1) go(n-1);
+    }
+  });
+  tg.BackButton.show();
+}
+</script>
+</body>
+</html>
